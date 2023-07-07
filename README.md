@@ -1,1 +1,1 @@
-Soon
+Django Pet Project
