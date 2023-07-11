@@ -9,8 +9,15 @@ class Brand(models.Model):
 
 
 class Product(models.Model):
+    GENDER_CHOICES = (
+        ('M', 'Мужской'),
+        ('F', 'Женский'),
+        ('U', 'Унисекс'),
+    )
+
     name = models.CharField(max_length=100)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+    gender = models.CharField(max_length=1, default='U', choices=GENDER_CHOICES)
     image = models.ImageField(upload_to='product_images/')
     price = models.DecimalField(max_digits=8, decimal_places=2)
     description = models.TextField()
