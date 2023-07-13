@@ -18,8 +18,7 @@ admin.site.register(Brand, BrandAdmin)
 
 
 class ProductAdmin(admin.ModelAdmin):
-    fields = ('image',)
-    list_display = ('name', 'brand', 'display_image', 'gender', 'price',)
+    list_display = ('name', 'brand', 'display_image', 'gender', 'is_kids', 'price',)
     list_display_links = ('name',)
 
     def display_image(self, obj):

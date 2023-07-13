@@ -10,9 +10,9 @@ class Brand(models.Model):
 
 class Product(models.Model):
     GENDER_CHOICES = (
-        ('M', 'Мужской'),
-        ('F', 'Женский'),
-        ('U', 'Унисекс'),
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('U', 'Unisex'),
     )
 
     name = models.CharField(max_length=100)
@@ -21,6 +21,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='product_images/')
     price = models.DecimalField(max_digits=8, decimal_places=2)
     description = models.TextField()
+    is_kids = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
