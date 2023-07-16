@@ -61,7 +61,8 @@
     <!----top-header---->
     <div class="top-header">
         <div class="logo">
-            <a href="index.html"><img src="{% static '/vendor1/images/logo.png' %}" title="barndlogo"/></a>
+            <a href="{% url 'index' %}"><img src="{% static '/vendor1/images/logo.png' %}"
+                                                    title="barndlogo"/></a>
         </div>
         <div class="top-header-info">
             <div class="top-contact-info">
@@ -83,8 +84,8 @@
                 </div>
                 <div class="login-rigister">
                     <ul class="unstyled-list list-inline">
-                        <li><a class="login" href="#">Login</a></li>
-                        <li><a class="rigister" href="#">REGISTER <span> </span></a></li>
+                        <li><a class="login" href="{% url 'users:login' %}">Login</a></li>
+                        <li><a class="rigister" href="{% url 'users:register' %}">REGISTER <span> </span></a></li>
                         <div class="clearfix"></div>
                     </ul>
                 </div>
@@ -99,11 +100,11 @@
         <!----start-top-nav---->
         <nav class="top-nav main-menu">
             <ul class="top-nav">
-                <li><a href="products.html">PRODUCTS </a><span> </span></li>
-                <li><a href="products.html">CAMPAINGS</a><span> </span></li>
-                <li><a href="products.html">SERVICES</a><span> </span></li>
-                <li><a href="products.html">BRANDS</a><span> </span></li>
-                <li><a href="products.html">ABOUT US</a></li>
+                <li><a href="{% url 'products:single' %}">PRODUCTS </a><span> </span></li>
+                <li><a href="{% url 'campaings' %}">CAMPAINGS</a><span> </span></li>
+                <li><a href="{% url 'services' %}">SERVICES</a><span> </span></li>
+                <li><a href="{% url 'brands' %}">BRANDS</a><span> </span></li>
+                <li><a href="{% url 'about' %}">ABOUT US</a></li>
                 <div class="clearfix"></div>
             </ul>
             <a href="#" id="pull"><img src="{% static '/vendor1/images/nav-icon.png' %}" title="menu"/></a>
@@ -131,11 +132,11 @@
         </div>
         <div class="col-md-7 footer-links">
             <ul class="unstyled-list list-inline">
-                <li><a href="#"> Faq</a> <span> </span></li>
-                <li><a href="#"> Terms and Conditions</a> <span> </span></li>
-                <li><a href="#"> Secure Payments</a> <span> </span></li>
-                <li><a href="#"> Shipping</a> <span> </span></li>
-                <li><a href="contact.html"> Contact</a></li>
+                <li><a href="{% url 'faq' %}"> Faq</a> <span> </span></li>
+                <li><a href="{% url 'terms' %}"> Terms and Conditions</a> <span> </span></li>
+                <li><a href="{% url 'payments' %}"> Secure Payments</a> <span> </span></li>
+                <li><a href="{% url 'shipping' %}"> Shipping</a> <span> </span></li>
+                <li><a href="{% url 'contacts' %}"> Contact</a></li>
                 <div class="clearfix"></div>
             </ul>
         </div>

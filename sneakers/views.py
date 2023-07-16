@@ -1,4 +1,7 @@
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.generic import DetailView
+
 from sneakers.models import Brand, Product
 from django.db.models import Count, Q
 
@@ -61,3 +64,27 @@ def single(request):
         'total_prod_kids': total_prod_kids,
     }
     return render(request, 'sneakers/single-page.html', context)
+
+def services(request):
+    return HttpResponse("Under construction")
+
+def brands(request):
+    return HttpResponse("Under construction")
+
+def about(request):
+    return HttpResponse("Under construction")
+
+def faq(request):
+    return HttpResponse("Under construction")
+
+def terms(request):
+    return HttpResponse("Under construction")
+
+def payments(request):
+    return HttpResponse("Under construction")
+
+def shipping(request):
+    return HttpResponse("Under construction")
+
+def campaings(request):
+    return HttpResponse("Under construction")
