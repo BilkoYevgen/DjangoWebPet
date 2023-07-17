@@ -1,76 +1,14 @@
 {% extends 'sneakers/base.html' %}
 {% load static %}
 
-{% block filter %}
-    <div class="content">
-        <div class="container">
-            <!--- products ---->
-            <div class="products">
-                <div class="product-filter">
-                    <h1><a href="#">FILTER</a></h1>
-                    <div class="product-filter-grids">
-                        <div class="col-md-3 product-filter-grid1-brands">
-                            <h3>BRANDS</h3>
-                            <ul class="col-md-6 unstyled-list b-list1">
-                                {% for brand in ten_brands %}
-                                    <li><a href="#">{{ brand.name }}</a></li>
-                                    <div class="clearfix"></div>
-                                {% endfor %}
-                            </ul>
-                            <ul class="col-md-6 unstyled-list b-list2">
-                                {% for brand in next_brands %}
-                                    <li><a href="#">{{ brand.name }}</a></li>
-                                    <div class="clearfix"></div>
-                                {% endfor %}
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <!---->
-                        <div class="col-md-8 product-filter-grid1-brands-col2">
-                            <div class="producst-cate-grids">
-                                <div class="col-md-4 producst-cate-grid text-center">
-                                    <h2>WOMAN</h2>
-                                    <img class="r-img text-center img"
-                                         src="{% static '/vendor1/images/img-w.jpg' %}" title="name">
-                                    <h4>TOTAL</h4>
-                                    <label>{{ total_prod_female }} PRODUCTS</label>
-                                    <a class="r-list-w" href="#"><img src="{% static '/vendor1/images/list-icon.png' %}"
-                                                                      title="list"></a>
-                                </div>
-                                <div class="col-md-4 producst-cate-grid text-center">
-                                    <h2>MAN</h2>
-                                    <img class="r-img text-center img"
-                                         src="{% static '/vendor1/images/man-r-img.jpg' %}" title="name">
-                                    <h4>TOTAL</h4>
-                                    <label>{{ total_prod_male }} PRODUCTS</label>
-                                    <a class="r-list-w" href="#"><img src="{% static '/vendor1/images/list-icon.png' %}"
-                                                                      title="list"></a>
-                                </div>
-                                <div class="col-md-4 producst-cate-grid text-center">
-                                    <h2>KIDS</h2>
-                                    <img class="r-img text-center img"
-                                         src="{% static '/vendor1/images/kid-r-img.jpg' %}" title="name">
-                                    <h4>TOTAL</h4>
-                                    <label>{{ total_prod_kids }} PRODUCTS</label>
-                                    <a class="r-list-w" href="#"><img src="{% static '/vendor1/images/list-icon.png' %}"
-                                                                      title="list"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endblock %}
+
 {% block content %}
     <div class="product-details">
         <div class="container">
             <div class="product-details-row1">
                 <div class="product-details-row1-head">
-                    <h2>Men'sFootwear</h2>
-                    <p>Hookset Handcrafted Fabric Chukka</p>
+                    <h2>{{ category.name }}</h2>
+                    <p>{{  category.short_description }}</p>
                 </div>
                 <div class="col-md-4 product-details-row1-col1">
                     <!----details-product-slider--->
@@ -157,13 +95,17 @@
                     </div>
                     <div class="product-price">
                         <div class="product-price-left text-right">
-                            <span>174.00</span>
-                            <h5>109.00$</h5>
+                            <span>{{ category.old_price }}$</span>
+                            <h5>{{ category.price }}$</h5>
                         </div>
-                        <div class="product-price-right">
-                            <a href="#"><span> </span></a>
-                            <label> save <b>40%</b></label>
-                        </div>
+<div class="product-price-right">
+    <a href="#"><span> </span></a>
+    {% if product.price < product.old_price %}
+        <label> save <b>{{ product.count_discount }}%</b></label>
+    {% else %}
+        <label> Best price!</label>
+    {% endif %}
+</div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="product-price-details">
@@ -217,26 +159,7 @@
                     </ul>
                     <div id="tab-1" class="product-complete-info">
                         <h3>DESCRIPTION:</h3>
-                        <p>With its beautiful premium leather, lace-up oxford styling, recycled rubber outsoles and
-                            9-inch height, this Earthkeepers City Premium style is an undeniably handsome boot. To
-                            complement its rustic, commanding outer appearance, we've paid attention to the inside
-                            as
-                            well - by adding SmartWool® faux shearling to the linings and crafting the footbed using
-                            our
-                            exclusive anti-fatigue comfort foam technology to absorb shock. Imported.</p>
-                        <span>DETAILS:</span>
-                        <div class="product-fea">
-                            <p>Premium burnished full-grain leather and suede upper</p>
-                            <p>Leather is from a tannery rated Silver for its water, energy and waste-management
-                                practices</p>
-                            <p>Leather lining and footbed for a premium feel and optimal comfort</p>
-                            <p>SmartWool® faux shearling lining is made with 60% merino wool and 40% PET</p>
-                            <p>Reflective insole board for additional warmth under foot</p>
-                            <p>100% organic cotton laces</p>
-                            <p>SmartWool® fabric-lined anti-fatigue footbed provides superior, all-day comfort and
-                                climate control</p>
-                            <p>Timberland® exclusive Gripstick™ and Green Rubber™ outsole is made with 42% recycled
-                                rubber</p>
+                        <p>{{ category.description }}</p>
                         </div>
                     </div>
 

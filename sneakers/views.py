@@ -89,3 +89,25 @@ def shipping(request):
 
 def campaings(request):
     return HttpResponse("Under construction")
+
+def get_category(request, product_name):
+    item = Product.objects.get(name=product_name)
+    all_brands = Brand.objects.all()
+    category = Product.objects.get(pk=item.id)
+    ten_brands = all_brands[:5]
+    next_brands = all_brands[5:10]
+    total_prod_female = get_product_count_by_gender('F', exclude_kids=True)
+    total_prod_male = get_product_count_by_gender('M', exclude_kids=True)
+    total_prod_kids = get_product_count_by_gender('U', exclude_kids=False)
+
+    context = {
+        'ten_brands': ten_brands,
+        'next_brands': next_brands,
+        'total_prod_female': total_prod_female,
+        'total_prod_male': total_prod_male,
+        'total_prod_kids': total_prod_kids,
+        'item': item,
+        'category': category
+    }
+
+    return render(request, "sneakers/single-page.html", context)

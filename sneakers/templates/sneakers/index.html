@@ -105,12 +105,12 @@
             <div class="special-products-grids">
                 {% for product in products %}
                 <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="{% url 'products:single' %}"><img src="{{ product.brand.logo.url }}"
+                    <a class="brand-name" href="/products/{{ product.name }}"><img src="{{ product.brand.logo.url }}"
                                                                        title="name"/></a>
-                    <a class="product-here" href="{% url 'products:single' %}"><img src="{{ product.image.url }}"
+                    <a class="product-here" href="/products/{{ product.name }}"><img src="{{ product.image.url }}"
                                                                          title="product-name"/></a>
-                    <h4><a href="{% url 'products:single' %}">{{ product.name }}</a></h4>
-                    <a class="product-btn" href="{% url 'products:single' %}"><span>{{ product.price }}</span><small>GET
+                    <h4><a href="/products/{{ product.name }}">{{ product.name }}</a></h4>
+                    <a class="product-btn" href="/products/{{ product.name }}"><span>{{ product.price }}</span><small>GET
                         NOW</small><label> </label></a>
                 </div>
                 {%  endfor %}

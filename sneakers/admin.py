@@ -20,6 +20,7 @@ admin.site.register(Brand, BrandAdmin)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'brand', 'display_image', 'gender', 'is_kids', 'price',)
     list_display_links = ('name',)
+    exclude = ('size', 'old_price')
 
     def display_image(self, obj):
         if obj.image:
