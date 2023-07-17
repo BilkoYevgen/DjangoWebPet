@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Brand, Product
+from .models import Brand, Product, SliderImage
 from django.utils.safestring import mark_safe
 
 
@@ -32,8 +32,15 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 
 
+class SliderAdmin(admin.ModelAdmin):
+    list_display = ('product', 'image')
+
+    def display_slider(self, obj):
+        if obj.image:
+            return mark_safe(f'<img src="{obj.image.url}" width="75">')
+        return None
+
+    display_slider.short_description = 'Image'
 
 
-
-
-
+admin.site.register(SliderImage, SliderAdmin)

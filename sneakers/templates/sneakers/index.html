@@ -28,36 +28,21 @@
 <!-- Slideshow 4 -->
 <div id="top" class="callbacks_container">
     <ul class="rslides" id="slider4">
+        {% for slider_image in slider_image %}
         <li>
-            <img src="{% static '/vendor1/images/slide1.png' %}" alt="">
+            <img src="{{ slider_image.image.url }}" alt="">
             <div class="caption">
                 <div class="slide-text-info">
-                    <h1>WILL HELM</h1>
-                    <label>WINTER</label>
-                    <a class="slide-btn" href="#"><span>99.90$</span> <small>GET NOW</small><label> </label></a>
+                    <h1>{{ slider_image.product.name }}</h1>
+                    <label>{{ slider_image.product.description }}</label>
+                    <a class="slide-btn" href="#"><span>{{ slider_image.product.price }}</span>
+                        <small>GET
+                        NOW</small><label>
+                    </label></a>
                 </div>
             </div>
         </li>
-        <li>
-            <img src="{% static '/vendor1/images/slide2.png' %}" alt="">
-            <div class="caption">
-                <div class="slide-text-info">
-                    <h1>FAST NER2</h1>
-                    <label>Dress Shoe</label>
-                    <a class="slide-btn" href="#"><span>99.90$</span> <small>GET NOW</small><label> </label></a>
-                </div>
-            </div>
-        </li>
-        <li>
-            <img src="{% static '/vendor1/images/slide1.png' %}" alt="">
-            <div class="caption">
-                <div class="slide-text-info">
-                    <h1>WILL HELM</h1>
-                    <label>WINTER</label>
-                    <a class="slide-btn" href="#"><span>99.90$</span> <small>GET NOW</small><label> </label></a>
-                </div>
-            </div>
-        </li>
+        {% endfor %}
     </ul>
 </div>
 <div class="clearfix"></div>
@@ -74,7 +59,7 @@
                     <span><img src="{% static '/vendor1/images/obj1.png' %}" title="name"/></span>
                     <h4>TOTAL</h4>
                     <label>{{ total_prod_female }} PRODUCTS</label>
-                    <a class="r-list-w" href="single-page.html"><img src="{% static '/vendor1/images/list-icon.png'%}"
+                    <a class="r-list-w" href="single-page.html"><img src="{% static '/vendor1/images/list-icon.png' %}"
                                                                      title="list"/></a>
                 </div>
             </div>

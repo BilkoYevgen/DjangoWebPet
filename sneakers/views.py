@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import DetailView
 
-from sneakers.models import Brand, Product
+from sneakers.models import Brand, Product, SliderImage
 from django.db.models import Count, Q
 
 def get_product_count_by_gender(gender, exclude_kids=False):
@@ -13,7 +13,7 @@ def get_product_count_by_gender(gender, exclude_kids=False):
 
 def index(request):
     total_products = Product.objects.all()
-
+    sliders = SliderImage.objects.all()
     total_prod_female = get_product_count_by_gender('F', exclude_kids=True)
     total_prod_male = get_product_count_by_gender('M', exclude_kids=True)
     total_prod_kids = get_product_count_by_gender('U', exclude_kids=False)
@@ -23,6 +23,7 @@ def index(request):
         'total_prod_female': total_prod_female,
         'total_prod_male': total_prod_male,
         'total_prod_kids': total_prod_kids,
+        'slider_image': sliders,
     }
 
     return render(request, 'sneakers/index.html', context)
