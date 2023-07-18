@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic import DetailView
-
+from sneakers.forms import ContactForm
 from sneakers.models import Brand, Product, SliderImage
 from django.db.models import Count, Q
 
@@ -30,7 +30,18 @@ def index(request):
 
 
 def contacts(request):
-    return render(request, 'sneakers/contact.html')
+    if request.method == "POST":
+        form = ContactForm(data=request.POST)
+        if form.is_valid():
+            # Process the form data here (e.g., send the email)
+            name = form.cleaned_data["name"]
+            email = form.cleaned_data["email"]
+            subject = form.cleaned_data["subject"]
+            message = form.cleaned_data["message"]
+            return render(request, 'sneakers/index.html')
+    else:
+        form = ContactForm()
+    return render(request, 'sneakers/contact.html', {'form': form})
 
 def products(request):
     all_brands = Brand.objects.all()

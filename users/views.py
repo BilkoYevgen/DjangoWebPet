@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from users.models import User
-from users.forms import UserLoginForm, UserRegistrationForm
+from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from django.contrib import auth
 from django.urls import reverse
 
@@ -26,14 +26,21 @@ def register(request):
         form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse("users:login"))
+            return HttpResponseRedirect(reverse("users:email_verification"))
     else:
         form = UserRegistrationForm()
     context = {'form': form}
     return render(request, 'users/register.html', context)
 
 def profile(request):
-    return render(request, 'users/profile.html')
+    if request.method == 'POST':
+        form = UserProfileForm(instance=request.user, data=request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('users:profile'))
+    else:
+        form = UserProfileForm(instance=request.user)
+    return render(request, 'users/profile.html', {'form': form})
 
 def email_verification(request):
     return render(request, 'users/email_verification.html')
