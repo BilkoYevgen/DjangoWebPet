@@ -44,3 +44,7 @@ def profile(request):
 
 def email_verification(request):
     return render(request, 'users/email_verification.html')
+
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect(reverse('index'))
