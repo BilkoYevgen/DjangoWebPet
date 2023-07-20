@@ -98,14 +98,14 @@
                             <span>{{ category.old_price }}$</span>
                             <h5>{{ category.price }}$</h5>
                         </div>
-<div class="product-price-right">
-    <a href="#"><span> </span></a>
-    {% if product.price < product.old_price %}
-        <label> save <b>{{ product.count_discount }}%</b></label>
-    {% else %}
-        <label> Best price!</label>
-    {% endif %}
-</div>
+                        <div class="product-price-right">
+                            <a href="#"><span> </span></a>
+                            {% if category.count_discount %}
+                                <label> save <b>{{ category.count_discount }}%</b></label>
+                            {% else %}
+                                <label> Best price!!</label>
+                            {% endif %}
+                        </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="product-price-details">

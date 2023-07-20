@@ -1,9 +1,11 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic import DetailView
 from sneakers.forms import ContactForm
 from sneakers.models import Brand, Product, SliderImage
 from django.db.models import Count, Q
+from django.contrib import messages
 
 def get_product_count_by_gender(gender, exclude_kids=False):
     if exclude_kids:
@@ -34,11 +36,12 @@ def contacts(request):
         form = ContactForm(data=request.POST)
         if form.is_valid():
             # Process the form data here (e.g., send the email)
-            name = form.cleaned_data["name"]
-            email = form.cleaned_data["email"]
-            subject = form.cleaned_data["subject"]
-            message = form.cleaned_data["message"]
-            return render(request, 'sneakers/index.html')
+            name = request.POST["name"]
+            email = request.POST["email"]
+            subject = request.POST["subject"]
+            message = request.POST["message"]
+            messages.success(request, 'Your form was sent successfully sended')
+            return HttpResponseRedirect(reverse('contacts'))
     else:
         form = ContactForm()
     return render(request, 'sneakers/contact.html', {'form': form})
@@ -103,6 +106,9 @@ def campaings(request):
 
 def get_category(request, product_name):
     item = Product.objects.get(name=product_name)
+    return render(request, "sneakers/single-page.html", get_context(item))
+
+def get_context(item):
     all_brands = Brand.objects.all()
     category = Product.objects.get(pk=item.id)
     ten_brands = all_brands[:5]
@@ -111,7 +117,7 @@ def get_category(request, product_name):
     total_prod_male = get_product_count_by_gender('M', exclude_kids=True)
     total_prod_kids = get_product_count_by_gender('U', exclude_kids=False)
 
-    context = {
+    return {
         'ten_brands': ten_brands,
         'next_brands': next_brands,
         'total_prod_female': total_prod_female,
@@ -121,4 +127,3 @@ def get_category(request, product_name):
         'category': category
     }
 
-    return render(request, "sneakers/single-page.html", context)
