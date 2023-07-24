@@ -82,8 +82,6 @@ def get_category(request, product_name):
 
     return render(request, "sneakers/single-page.html", context)
 
-
-
 def services(request):
     return HttpResponse("Under construction")
 
@@ -91,19 +89,19 @@ def brands(request):
     return HttpResponse("Under construction")
 
 def about(request):
-    return HttpResponse("Under construction")
+    return render(request, "sneakers/about.html")
 
 def faq(request):
-    return HttpResponse("Under construction")
+    return render(request, "sneakers/faq.html")
 
 def terms(request):
-    return HttpResponse("Under construction")
+    return render(request, "sneakers/terms.html")
 
 def payments(request):
-    return HttpResponse("Under construction")
+    return render(request, "sneakers/payment.html")
 
 def shipping(request):
-    return HttpResponse("Under construction")
+    return render(request, "sneakers/shipping.html")
 
 def campaings(request):
     return HttpResponse("Under construction")
