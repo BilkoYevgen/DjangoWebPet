@@ -84,8 +84,14 @@
                 </div>
                 <div class="login-rigister">
                     <ul class="unstyled-list list-inline">
-                        <li><a class="login" href="{% url 'users:login' %}">Login</a></li>
-                        <li><a class="rigister" href="{% url 'users:register' %}">REGISTER <span> </span></a></li>
+                        {% if user.is_authenticated %}
+                            <li><a class="login" href="{% url 'users:logout' %}">Logout</a></li>
+                            <li><a class="rigister" href="{% url 'users:profile' %}">Hi, {{ user }}<span>
+                            </span></a></li>
+                        {% else %}
+                            <li><a class="login" href="{% url 'users:login' %}">Login</a></li>
+                            <li><a class="rigister" href="{% url 'users:register' %}">REGISTER <span> </span></a></li>
+                        {% endif %}
                         <div class="clearfix"></div>
                     </ul>
                 </div>
@@ -100,7 +106,7 @@
         <!----start-top-nav---->
         <nav class="top-nav main-menu">
             <ul class="top-nav">
-                <li><a href="{% url 'products:single' %}">PRODUCTS </a><span> </span></li>
+                <li><a href="{% url 'products:index' %}">PRODUCTS </a><span> </span></li>
                 <li><a href="{% url 'campaings' %}">CAMPAINGS</a><span> </span></li>
                 <li><a href="{% url 'services' %}">SERVICES</a><span> </span></li>
                 <li><a href="{% url 'brands' %}">BRANDS</a><span> </span></li>
