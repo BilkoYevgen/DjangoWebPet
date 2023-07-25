@@ -43,14 +43,14 @@
                                 <li>
                                     <a href="optionallink.html">
                                         <img class="etalage_thumb_image"
-                                             src="{% static '/vendor1/images/product-slide/image1_thumb.jpg' %}"/>
+                                             src="{% static '/vendor1/images/product-slide/image1_large.jpg' %}"/>
                                         <img class="etalage_source_image"
                                              src="{% static '/vendor1/images/product-slide/image1_large.jpg' %}"/>
                                     </a>
                                 </li>
                                 <li>
                                     <img class="etalage_thumb_image"
-                                         src="{% static '/vendor1/images/product-slide/image2_thumb.jpg' %}"/>
+                                         src="{% static '/vendor1/images/product-slide/image2_large.jpg' %}"/>
                                     <img class="etalage_source_image"
                                          src="{% static '/vendor1/images/product-slide/image2_large.jpg' %}"/>
                                 </li>
@@ -95,7 +95,9 @@
                     </div>
                     <div class="product-price">
                         <div class="product-price-left text-right">
+                            {% if category.count_discount %}
                             <span>{{ category.old_price }}$</span>
+                            {% endif %}
                             <h5>{{ category.price }}$</h5>
                         </div>
                         <div class="product-price-right">
@@ -114,7 +116,7 @@
                             readable content of a page when looking at its layout. The point of using Lorem Ipsum is
                             that it has a more-or-less normal distribution of letters, as opposed to using 'Content
                             here,e </p>
-                        <a class="shipping" href="#"><span> </span>Free shipping</a>
+                        <a class="shipping" href="{% url 'terms' %}"><span> </span>Free shipping</a>
                         <div class="clearfix"></div>
                         <div class="product-size-qty">
                             <div class="pro-size">

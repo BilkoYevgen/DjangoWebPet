@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Brand, Product, SliderImage
+from .models import Brand, Product, SliderImage, ProdImage
 from django.utils.safestring import mark_safe
 
 
@@ -18,16 +18,16 @@ admin.site.register(Brand, BrandAdmin)
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'brand', 'display_image', 'gender', 'is_kids', 'price',)
+    list_display = ('name', 'brand', 'gender', 'is_kids', 'price')
     list_display_links = ('name',)
-    exclude = ('size', 'old_price')
+    exclude = ('size',)
 
-    def display_image(self, obj):
-        if obj.image:
-            return mark_safe(f'<img src="{obj.image.url}" width="75">')
-        return None
-
-    display_image.short_description = 'Image'
+    # def display_image(self, obj):
+    #     if obj.image:
+    #         return mark_safe(f'<img src="{obj.image.url}" width="75">')
+    #     return None
+    #
+    # display_image.short_description = 'Image'
 
 
 admin.site.register(Product, ProductAdmin)
@@ -45,3 +45,8 @@ class SliderAdmin(admin.ModelAdmin):
 
 
 admin.site.register(SliderImage, SliderAdmin)
+
+class ProdImageAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(ProdImage, ProdImageAdmin)

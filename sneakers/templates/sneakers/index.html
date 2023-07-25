@@ -2,53 +2,53 @@
 {% load static %}
 
 {% block content %}
-<!----start-slider-script---->
-<script src="{% static '/vendor1/js/responsiveslides.min.js' %}"></script>
-<script>
-    // You can also use "$(window).load(function() {"
-    $(function () {
-        // Slideshow 4
-        $("#slider4").responsiveSlides({
-            auto: true,
-            pager: true,
-            nav: true,
-            speed: 500,
-            namespace: "callbacks",
-            before: function () {
-                $('.events').append("<li>before event fired.</li>");
-            },
-            after: function () {
-                $('.events').append("<li>after event fired.</li>");
-            }
-        });
+    <!----start-slider-script---->
+    <script src="{% static '/vendor1/js/responsiveslides.min.js' %}"></script>
+    <script>
+        // You can also use "$(window).load(function() {"
+        $(function () {
+            // Slideshow 4
+            $("#slider4").responsiveSlides({
+                auto: true,
+                pager: true,
+                nav: true,
+                speed: 500,
+                namespace: "callbacks",
+                before: function () {
+                    $('.events').append("<li>before event fired.</li>");
+                },
+                after: function () {
+                    $('.events').append("<li>after event fired.</li>");
+                }
+            });
 
-    });
-</script>
-<!----//End-slider-script---->
-<!-- Slideshow 4 -->
-<div id="top" class="callbacks_container">
-    <ul class="rslides" id="slider4">
-        {% for slider_image in slider_image %}
-        <li>
-            <img src="{{ slider_image.image.url }}" alt="">
-            <div class="caption">
-                <div class="slide-text-info">
-                    <h1>{{ slider_image.product.name }}</h1>
-                    <label>{{ slider_image.product.description }}</label>
-                    <a class="slide-btn" href="#"><span>{{ slider_image.product.price }}</span>
-                        <small>GET
-                        NOW</small><label>
-                    </label></a>
-                </div>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
-</div>
-<div class="clearfix"></div>
-<!----- //End-slider---->
+        });
+    </script>
+    <!----//End-slider-script---->
+    <!-- Slideshow 4 -->
+    <div id="top" class="callbacks_container">
+        <ul class="rslides" id="slider4">
+            {% for slider_image in slider_image %}
+                <li>
+                    <img src="{{ slider_image.image.url }}" alt="">
+                    <div class="caption">
+                        <div class="slide-text-info">
+                            <h1>{{ slider_image.product.name }}</h1>
+                            <label>{{ slider_image.product.description }}</label>
+                            <a class="slide-btn" href="#"><span>{{ slider_image.product.price }}</span>
+                                <small>GET
+                                    NOW</small><label>
+                                </label></a>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="clearfix"></div>
+    <!----- //End-slider---->
     <!----content---->
-<div class="content">
+    <div class="content">
     <div class="container">
         <!---top-row--->
         <div class="top-row">
@@ -104,16 +104,27 @@
             <!----special-products-grids---->
             <div class="special-products-grids">
                 {% for product in products %}
-                <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="/products/{{ product.name }}"><img src="{{ product.brand.logo.url }}"
-                                                                       title="name"/></a>
-                    <a class="product-here" href="/products/{{ product.name }}"><img src="{{ product.image.url }}"
-                                                                         title="product-name"/></a>
-                    <h4><a href="/products/{{ product.name }}">{{ product.name }}</a></h4>
-                    <a class="product-btn" href="/products/{{ product.name }}"><span>{{ product.price }}</span><small>GET
-                        NOW</small><label> </label></a>
-                </div>
-                {%  endfor %}
+                    {% if product.special_prod %}
+                        <div class="col-md-3 special-products-grid text-center">
+                            <a class="brand-name" href="/products/{{ product.name }}">
+                                <img src="{{ product.brand.logo.url }}" title="name"/>
+                            </a>
+                            {% with first_image=product.images.first %}
+                                {% if first_image %}
+                                    <a class="product-here" href="/products/{{ product.name }}">
+                                        <img src="{{ first_image.image.url }}" title="product-name"/>
+                                    </a>
+                                {% endif %}
+                            {% endwith %}
+                            <h4><a href="/products/{{ product.name }}">{{ product.name }}</a></h4>
+                            <a class="product-btn" href="/products/{{ product.name }}">
+                                <span>{{ product.price }}</span>
+                                <small>GET NOW</small>
+                                <label> </label>
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
                 <div class="clearfix"></div>
             </div>
             <!---//special-products-grids---->

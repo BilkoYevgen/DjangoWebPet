@@ -3,9 +3,10 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import DetailView
 from sneakers.forms import ContactForm
-from sneakers.models import Brand, Product, SliderImage
+from sneakers.models import Brand, Product, SliderImage, ProdImage
 from django.db.models import Count, Q
 from django.contrib import messages
+import random
 
 def get_product_count_by_gender(gender, exclude_kids=False):
     if exclude_kids:
@@ -41,6 +42,7 @@ def brand_slice():
 
 def index(request):
     context = filter()
+    context['image'] = ProdImage.objects.all()
     context['products'] = Product.objects.all()
     context['slider_image'] = SliderImage.objects.all()
 
@@ -64,6 +66,10 @@ def contacts(request):
 
 def products(request):
     context = filter()
+    latest_products = Product.objects.order_by('-id')[:8]
+    context['last_products'] = latest_products
+    context['image'] = ProdImage.objects.all()
+    context['products'] = Product.objects.all()
     context.update(brand_slice())
 
     return render(request, 'sneakers/products.html', context)
@@ -82,10 +88,13 @@ def get_category(request, product_name):
 
     return render(request, "sneakers/single-page.html", context)
 
-def services(request):
+def mans(request):
     return HttpResponse("Under construction")
 
-def brands(request):
+def woman(request):
+    return HttpResponse("Under construction")
+
+def kids(request):
     return HttpResponse("Under construction")
 
 def about(request):
@@ -102,6 +111,3 @@ def payments(request):
 
 def shipping(request):
     return render(request, "sneakers/shipping.html")
-
-def campaings(request):
-    return HttpResponse("Under construction")

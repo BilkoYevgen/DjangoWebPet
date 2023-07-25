@@ -2,71 +2,71 @@
 {% load static %}
 
 {% block filter %}
-<div class="content">
-    <div class="container">
-        <!--- products ---->
-        <div class="products">
-            <div class="product-filter">
-                <h1><a href="#">FILTER</a></h1>
-                <div class="product-filter-grids">
-                    <div class="col-md-3 product-filter-grid1-brands">
-                        <h3>BRANDS</h3>
-                        <ul class="col-md-6 unstyled-list b-list1">
-                            {% for brand in ten_brands %}
-                                <li><a href="#">{{ brand.name }}</a></li>
-                                <div class="clearfix"></div>
-                            {% endfor %}
-                        </ul>
-                        <ul class="col-md-6 unstyled-list b-list2">
-                            {% for brand in next_brands %}
-                                <li><a href="#">{{ brand.name }}</a></li>
-                                <div class="clearfix"></div>
-                            {% endfor %}
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                    <!---->
-                    <div class="col-md-8 product-filter-grid1-brands-col2">
-                        <div class="producst-cate-grids">
-                            <div class="col-md-4 producst-cate-grid text-center">
-                                <h2>WOMAN</h2>
-                                <img class="r-img text-center img"
-                                     src="{% static '/vendor1/images/img-w.jpg' %}" title="name">
-                                <h4>TOTAL</h4>
-                                <label>{{ total_prod_female }} PRODUCTS</label>
-                                <a class="r-list-w" href="#"><img src="{% static '/vendor1/images/list-icon.png' %}"
-                                                                  title="list"></a>
-                            </div>
-                            <div class="col-md-4 producst-cate-grid text-center">
-                                <h2>MAN</h2>
-                                <img class="r-img text-center img"
-                                     src="{% static '/vendor1/images/man-r-img.jpg' %}" title="name">
-                                <h4>TOTAL</h4>
-                                <label>{{ total_prod_male }} PRODUCTS</label>
-                                <a class="r-list-w" href="#"><img src="{% static '/vendor1/images/list-icon.png' %}"
-                                                                  title="list"></a>
-                            </div>
-                            <div class="col-md-4 producst-cate-grid text-center">
-                                <h2>KIDS</h2>
-                                <img class="r-img text-center img"
-                                     src="{% static '/vendor1/images/kid-r-img.jpg' %}" title="name">
-                                <h4>TOTAL</h4>
-                                <label>{{ total_prod_kids }} PRODUCTS</label>
-                                <a class="r-list-w" href="#"><img src="{% static '/vendor1/images/list-icon.png' %}"
-                                                                  title="list"></a>
+    <div class="content">
+        <div class="container">
+            <!--- products ---->
+            <div class="products">
+                <div class="product-filter">
+                    <h1><a href="#">FILTER</a></h1>
+                    <div class="product-filter-grids">
+                        <div class="col-md-3 product-filter-grid1-brands">
+                            <h3>BRANDS</h3>
+                            <ul class="col-md-6 unstyled-list b-list1">
+                                {% for brand in ten_brands %}
+                                    <li><a href="#">{{ brand.name }}</a></li>
+                                    <div class="clearfix"></div>
+                                {% endfor %}
+                            </ul>
+                            <ul class="col-md-6 unstyled-list b-list2">
+                                {% for brand in next_brands %}
+                                    <li><a href="#">{{ brand.name }}</a></li>
+                                    <div class="clearfix"></div>
+                                {% endfor %}
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!---->
+                        <div class="col-md-8 product-filter-grid1-brands-col2">
+                            <div class="producst-cate-grids">
+                                <div class="col-md-4 producst-cate-grid text-center">
+                                    <h2>WOMAN</h2>
+                                    <img class="r-img text-center img"
+                                         src="{% static '/vendor1/images/img-w.jpg' %}" title="name">
+                                    <h4>TOTAL</h4>
+                                    <label>{{ total_prod_female }} PRODUCTS</label>
+                                    <a class="r-list-w" href="#"><img src="{% static '/vendor1/images/list-icon.png' %}"
+                                                                      title="list"></a>
+                                </div>
+                                <div class="col-md-4 producst-cate-grid text-center">
+                                    <h2>MAN</h2>
+                                    <img class="r-img text-center img"
+                                         src="{% static '/vendor1/images/man-r-img.jpg' %}" title="name">
+                                    <h4>TOTAL</h4>
+                                    <label>{{ total_prod_male }} PRODUCTS</label>
+                                    <a class="r-list-w" href="#"><img src="{% static '/vendor1/images/list-icon.png' %}"
+                                                                      title="list"></a>
+                                </div>
+                                <div class="col-md-4 producst-cate-grid text-center">
+                                    <h2>KIDS</h2>
+                                    <img class="r-img text-center img"
+                                         src="{% static '/vendor1/images/kid-r-img.jpg' %}" title="name">
+                                    <h4>TOTAL</h4>
+                                    <label>{{ total_prod_kids }} PRODUCTS</label>
+                                    <a class="r-list-w" href="#"><img src="{% static '/vendor1/images/list-icon.png' %}"
+                                                                      title="list"></a>
+                                </div>
                             </div>
                         </div>
+                        <div class="clearfix"></div>
                     </div>
-                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block content %}
-<div class="content">
+    <div class="content">
     <div class="container">
 
         <!----speical-products---->
@@ -82,80 +82,29 @@
             </div>
             <!----special-products-grids---->
             <div class="special-products-grids">
-                <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="single-page.html"><img src="{% static '/vendor1/images/b1.jpg' %}"
-                                                                       title="name"/></a>
-                    <a class="product-here" href="single-page.html"><img src="{% static '/vendor1/images/p1.jpg' %}"
-                                                                         title="product-name"/></a>
-                    <h4><a href="single-page.html">Nike Roshe Run</a></h4>
-                    <a class="product-btn" href="single-page.html"><span>109.90$</span><small>GET
-                        NOW</small><label> </label></a>
-                </div>
-                <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="single-page.html"><img src="{% static '/vendor1/images/b2.jpg' %}"
-                                                                       title="name"/></a>
-                    <a class="product-here" href="single-page.html"><img src="{% static '/vendor1/images/p2.jpg' %}"
-                                                                         title="product-name"/></a>
-                    <h4><a href="single-page.html">Line Link 67009</a></h4>
-                    <a class="product-btn" href="single-page.html"><span>109.90$</span><small>GET
-                        NOW</small><label> </label></a>
-                </div>
-                <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="single-page.html"><img src="{% static '/vendor1/images/b3.jpg' %}"
-                                                                       title="name"/></a>
-                    <a class="product-here" href="single-page.html"><img src="{% static '/vendor1/images/p3.jpg' %}"
-                                                                         title="product-name"/></a>
-                    <h4><a href="single-page.html">Minimus Zero </a></h4>
-                    <a class="product-btn" href="single-page.html"><span>109.90$</span><small>GET
-                        NOW</small><label> </label></a>
-                </div>
-                <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="single-page.html"><img src="{% static '/vendor1/images/b4.jpg' %}"
-                                                                       title="name"/></a>
-                    <a class="product-here" href="single-page.html"><img src="{% static '/vendor1/images/p4.jpg' %}"
-                                                                         title="product-name"/></a>
-                    <h4><a href="single-page.html"> Athletic Shoe </a></h4>
-                    <a class="product-btn" href="single-page.html"><span>109.90$</span><small>GET
-                        NOW</small><label> </label></a>
-                </div>
-                <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="single-page.html"><img src="{% static '/vendor1/images/b5.jpg' %}"
-                                                                       title="name"/></a>
-                    <a class="product-here" href="single-page.html"><img src="{% static '/vendor1/images/p2.jpg' %}"
-                                                                         title="product-name"/></a>
-                    <h4><a href="single-page.html">Veronique </a></h4>
-                    <a class="product-btn" href="single-page.html"><span>109.90$</span><small>GET
-                        NOW</small><label> </label></a>
-                </div>
-                <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="single-page.html"><img src="{% static '/vendor1/images/b6.jpg' %}"
-                                                                       title="name"/></a>
-                    <a class="product-here" href="single-page.html"><img src="{% static '/vendor1/images/p6.jpg' %}"
-                                                                         title="product-name"/></a>
-                    <h4><a href="single-page.html">Suede Boots </a></h4>
-                    <a class="product-btn" href="single-page.html"><span>109.90$</span><small>GET
-                        NOW</small><label> </label></a>
-                </div>
-                <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="single-page.html"><img src="{% static '/vendor1/images/b7.jpg' %}"
-                                                                       title="name"/></a>
-                    <a class="product-here" href="single-page.html"><img src="{% static '/vendor1/images/p7.jpg' %}"
-                                                                         title="product-name"/></a>
-                    <h4><a href="single-page.html">Barricade 6.0 </a></h4>
-                    <a class="product-btn" href="single-page.html"><span>109.90$</span><small>GET
-                        NOW</small><label> </label></a>
-                </div>
-                <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="single-page.html"><img src="{% static '/vendor1/images/b1.jpg' %}"
-                                                                       title="name"/></a>
-                    <a class="product-here" href="single-page.html"><img src="{% static '/vendor1/images/p8.jpg' %}"
-                                                                         title="product-name"/></a>
-                    <h4><a href="single-page.html">Cotu Classic </a></h4>
-                    <a class="product-btn" href="single-page.html"><span>109.90$</span><small>GET
-                        NOW</small><label> </label></a>
-                </div>
+                {% for product in products|slice:":8" %}
+                    <div class="col-md-3 special-products-grid text-center">
+                        <a class="brand-name" href="/products/{{ product.name }}">
+                            <img src="{{ product.brand.logo.url }}" title="name"/>
+                        </a>
+                        {% with first_image=product.images.first %}
+                            {% if first_image %}
+                                <a class="product-here" href="/products/{{ product.name }}">
+                                    <img src="{{ first_image.image.url }}" title="product-name"/>
+                                </a>
+                            {% endif %}
+                        {% endwith %}
+                        <h4><a href="/products/{{ product.name }}">{{ product.name }}</a></h4>
+                        <a class="product-btn" href="/products/{{ product.name }}">
+                            <span>{{ product.price }}$</span>
+                            <small>GET NOW</small>
+                            <label> </label>
+                        </a>
+                    </div>
+                {% endfor %}
                 <div class="clearfix"></div>
             </div>
+
             <!---//special-products-grids---->
         </div>
         <!----->
@@ -171,80 +120,29 @@
             </div>
             <!----special-products-grids---->
             <div class="special-products-grids">
-                <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="single-page.html"><img src="{% static '/vendor1/images/b1.jpg' %}"
-                                                                       title="name"/></a>
-                    <a class="product-here" href="single-page.html"><img src="{% static '/vendor1/images/p1.jpg' %}"
-                                                                         title="product-name"/></a>
-                    <h4><a href="#">Nike Roshe Run</a></h4>
-                    <a class="product-btn" href="single-page.html"><span>109.90$</span><small>GET
-                        NOW</small><label> </label></a>
-                </div>
-                <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="single-page.html"><img src="{% static '/vendor1/images/b2.jpg' %}"
-                                                                       title="name"/></a>
-                    <a class="product-here" href="single-page.html"><img src="{% static '/vendor1/images/p2.jpg' %}"
-                                                                         title="product-name"/></a>
-                    <h4><a href="#">Line Link 67009</a></h4>
-                    <a class="product-btn" href="single-page.html"><span>109.90$</span><small>GET
-                        NOW</small><label> </label></a>
-                </div>
-                <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="single-page.html"><img src="{% static '/vendor1/images/b3.jpg' %}"
-                                                                       title="name"/></a>
-                    <a class="product-here" href="single-page.html"><img src="{% static '/vendor1/images/p3.jpg' %}"
-                                                                         title="product-name"/></a>
-                    <h4><a href="single-page.html">Minimus Zero </a></h4>
-                    <a class="product-btn" href="single-page.html"><span>109.90$</span><small>GET
-                        NOW</small><label> </label></a>
-                </div>
-                <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="single-page.html"><img src="{% static '/vendor1/images/b4.jpg' %}"
-                                                                       title="name"/></a>
-                    <a class="product-here" href="single-page.html"><img src="{% static '/vendor1/images/p4.jpg' %}"
-                                                                         title="product-name"/></a>
-                    <h4><a href="single-page.html"> Athletic Shoe </a></h4>
-                    <a class="product-btn" href="single-page.html"><span>109.90$</span><small>GET
-                        NOW</small><label> </label></a>
-                </div>
-                <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="single-page.html"><img src="{% static '/vendor1/images/b5.jpg' %}"
-                                                                       title="name"/></a>
-                    <a class="product-here" href="single-page.html"><img src="{% static '/vendor1/images/p2.jpg' %}"
-                                                                         title="product-name"/></a>
-                    <h4><a href="single-page.html">Veronique </a></h4>
-                    <a class="product-btn" href="single-page.html"><span>109.90$</span><small>GET
-                        NOW</small><label> </label></a>
-                </div>
-                <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="single-page.html"><img src="{% static '/vendor1/images/b6.jpg' %}"
-                                                                       title="name"/></a>
-                    <a class="product-here" href="single-page.html"><img src="{% static '/vendor1/images/p6.jpg' %}"
-                                                                         title="product-name"/></a>
-                    <h4><a href="single-page.html">Suede Boots </a></h4>
-                    <a class="product-btn" href="single-page.html"><span>109.90$</span><small>GET
-                        NOW</small><label> </label></a>
-                </div>
-                <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="single-page.html"><img src="{% static '/vendor1/images/b7.jpg' %}"
-                                                                       title="name"/></a>
-                    <a class="product-here" href="single-page.html"><img src="{% static '/vendor1/images/p7.jpg' %}"
-                                                                         title="product-name"/></a>
-                    <h4><a href="single-page.html">Barricade 6.0 </a></h4>
-                    <a class="product-btn" href="single-page.html"><span>109.90$</span><small>GET
-                        NOW</small><label> </label></a>
-                </div>
-                <div class="col-md-3 special-products-grid text-center">
-                    <a class="brand-name" href="single-page.html"><img src="{% static '/vendor1/images/b1.jpg' %}"
-                                                                       title="name"/></a>
-                    <a class="product-here" href="single-page.html"><img src="{% static '/vendor1/images/p8.jpg' %}"
-                                                                         title="product-name"/></a>
-                    <h4><a href="single-page.html">Cotu Classic </a></h4>
-                    <a class="product-btn" href="single-page.html"><span>109.90$</span><small>GET
-                        NOW</small><label> </label></a>
-                </div>
-                <div class="clearfix"></div>
-            </div>
+    {% for product in last_products %}
+        <div class="col-md-3 special-products-grid text-center">
+            <a class="brand-name" href="/products/{{ product.name }}">
+                <img src="{{ product.brand.logo.url }}" title="name"/>
+            </a>
+            {% with first_image=product.images.first %}
+                {% if first_image %}
+                    <a class="product-here" href="/products/{{ product.name }}">
+                        <img src="{{ first_image.image.url }}" title="product-name"/>
+                    </a>
+                {% endif %}
+            {% endwith %}
+            <h4><a href="/products/{{ product.name }}">{{ product.name }}</a></h4>
+            <a class="product-btn" href="/products/{{ product.name }}">
+                <span>{{ product.price }}$</span>
+                <small>GET NOW</small>
+                <label> </label>
+            </a>
+        </div>
+    {% endfor %}
+    <div class="clearfix"></div>
+</div>
+
             <!---//special-products-grids---->
         </div>
         <!---//speical-products---->
