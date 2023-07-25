@@ -34,8 +34,9 @@
                                          src="{% static '/vendor1/images/img-w.jpg' %}" title="name">
                                     <h4>TOTAL</h4>
                                     <label>{{ total_prod_female }} PRODUCTS</label>
-                                    <a class="r-list-w" href="#"><img src="{% static '/vendor1/images/list-icon.png' %}"
-                                                                      title="list"></a>
+                                    <a class="r-list-w" href="{% url 'mans' %}"><img
+                                            src="{% static '/vendor1/images/list-icon.png' %}"
+                                            title="list"></a>
                                 </div>
                                 <div class="col-md-4 producst-cate-grid text-center">
                                     <h2>MAN</h2>
@@ -43,8 +44,9 @@
                                          src="{% static '/vendor1/images/man-r-img.jpg' %}" title="name">
                                     <h4>TOTAL</h4>
                                     <label>{{ total_prod_male }} PRODUCTS</label>
-                                    <a class="r-list-w" href="#"><img src="{% static '/vendor1/images/list-icon.png' %}"
-                                                                      title="list"></a>
+                                    <a class="r-list-w" href="{% url 'woman' %}"><img
+                                            src="{% static '/vendor1/images/list-icon.png' %}"
+                                            title="list"></a>
                                 </div>
                                 <div class="col-md-4 producst-cate-grid text-center">
                                     <h2>KIDS</h2>
@@ -52,8 +54,9 @@
                                          src="{% static '/vendor1/images/kid-r-img.jpg' %}" title="name">
                                     <h4>TOTAL</h4>
                                     <label>{{ total_prod_kids }} PRODUCTS</label>
-                                    <a class="r-list-w" href="#"><img src="{% static '/vendor1/images/list-icon.png' %}"
-                                                                      title="list"></a>
+                                    <a class="r-list-w" href="{% url 'kids' %}"><img
+                                            src="{% static '/vendor1/images/list-icon.png' %}"
+                                            title="list"></a>
                                 </div>
                             </div>
                         </div>
@@ -120,28 +123,28 @@
             </div>
             <!----special-products-grids---->
             <div class="special-products-grids">
-    {% for product in last_products %}
-        <div class="col-md-3 special-products-grid text-center">
-            <a class="brand-name" href="/products/{{ product.name }}">
-                <img src="{{ product.brand.logo.url }}" title="name"/>
-            </a>
-            {% with first_image=product.images.first %}
-                {% if first_image %}
-                    <a class="product-here" href="/products/{{ product.name }}">
-                        <img src="{{ first_image.image.url }}" title="product-name"/>
-                    </a>
-                {% endif %}
-            {% endwith %}
-            <h4><a href="/products/{{ product.name }}">{{ product.name }}</a></h4>
-            <a class="product-btn" href="/products/{{ product.name }}">
-                <span>{{ product.price }}$</span>
-                <small>GET NOW</small>
-                <label> </label>
-            </a>
-        </div>
-    {% endfor %}
-    <div class="clearfix"></div>
-</div>
+                {% for product in last_products %}
+                    <div class="col-md-3 special-products-grid text-center">
+                        <a class="brand-name" href="/products/{{ product.name }}">
+                            <img src="{{ product.brand.logo.url }}" title="name"/>
+                        </a>
+                        {% with first_image=product.images.first %}
+                            {% if first_image %}
+                                <a class="product-here" href="/products/{{ product.name }}">
+                                    <img src="{{ first_image.image.url }}" title="product-name"/>
+                                </a>
+                            {% endif %}
+                        {% endwith %}
+                        <h4><a href="/products/{{ product.name }}">{{ product.name }}</a></h4>
+                        <a class="product-btn" href="/products/{{ product.name }}">
+                            <span>{{ product.price }}$</span>
+                            <small>GET NOW</small>
+                            <label> </label>
+                        </a>
+                    </div>
+                {% endfor %}
+                <div class="clearfix"></div>
+            </div>
 
             <!---//special-products-grids---->
         </div>

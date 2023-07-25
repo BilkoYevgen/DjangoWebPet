@@ -59,7 +59,8 @@
                     <span><img src="{% static '/vendor1/images/obj1.png' %}" title="name"/></span>
                     <h4>TOTAL</h4>
                     <label>{{ total_prod_female }} PRODUCTS</label>
-                    <a class="r-list-w" href="single-page.html"><img src="{% static '/vendor1/images/list-icon.png' %}"
+                    <a class="r-list-w" href="{% url 'mans' %}"><img src=
+                                                                               "{% static '/vendor1/images/list-icon.png' %}"
                                                                      title="list"/></a>
                 </div>
             </div>
@@ -70,7 +71,8 @@
                     <span><img src="{% static '/vendor1/images/obj2.png' %}" title="name"/></span>
                     <h4>TOTAL</h4>
                     <label>{{ total_prod_male }} PRODUCTS</label>
-                    <a class="r-list-w" href="single-page.html"><img src="{% static '/vendor1/images/list-icon.png' %}"
+                    <a class="r-list-w" href="{% url 'woman' %}"><img src=
+                                                                                       "{% static '/vendor1/images/list-icon.png' %}"
                                                                      title="list"/></a>
                 </div>
             </div>
@@ -81,7 +83,7 @@
                     <span><img src="{% static '/vendor1/images/obj3.png' %}" title="name"/></span>
                     <h4>TOTAL</h4>
                     <label>{{ total_prod_kids }} PRODUCTS</label>
-                    <a class="r-list-w" href="single-page.html"><img
+                    <a class="r-list-w" href="{% url 'kids' %}"><img
                             src="{% static '/vendor1/images/list-icon.png' %}" title="list"/></a>
                 </div>
             </div>

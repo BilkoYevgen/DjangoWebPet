@@ -89,13 +89,31 @@ def get_category(request, product_name):
     return render(request, "sneakers/single-page.html", context)
 
 def mans(request):
-    return HttpResponse("Under construction")
+    male_products = Product.objects.filter(gender__in=['M', 'U'], is_kids=False)
+
+    context = {
+        'male_products': male_products
+    }
+
+    return render(request, "sneakers/mans.html", context)
 
 def woman(request):
-    return HttpResponse("Under construction")
+    female_products = Product.objects.filter(gender__in=['F', 'U'], is_kids=False)
+
+    context = {
+        'female_products': female_products
+    }
+
+    return render(request, "sneakers/woman.html", context)
 
 def kids(request):
-    return HttpResponse("Under construction")
+    kids_products = Product.objects.filter(is_kids=True)
+
+    context = {
+        'kids_products': kids_products
+    }
+
+    return render(request, "sneakers/kids.html", context)
 
 def about(request):
     return render(request, "sneakers/about.html")
