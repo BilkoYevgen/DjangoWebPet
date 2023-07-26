@@ -1,0 +1,48 @@
+{% extends 'sneakers/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="content">
+        <div class="container">
+
+            <div class="special-products all-poroducts">
+                <div class="s-products-head">
+                    {% if object_list %}
+                    <div class="s-products-head-left">
+                        <h3>Here is a list of products that we found for your request: <span>{{ q }}</span></h3>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="special-products-grids">
+                    {% for product in object_list %}
+                        <div class="col-md-3 special-products-grid text-center">
+                            <a class="brand-name" href="/products/{{ product.name }}">
+                                <img src="{{ product.brand.logo.url }}" title="name"/>
+                            </a>
+                            {% with first_image=product.images.first %}
+                                {% if first_image %}
+                                    <a class="product-here" href="/products/{{ product.name }}">
+                                        <img src="{{ first_image.image.url }}" title="product-name"/>
+                                    </a>
+                                {% endif %}
+                            {% endwith %}
+                            <h4><a href="/products/{{ product.name }}">{{ product.name }}</a></h4>
+                            <a class="product-btn" href="/products/{{ product.name }}">
+                                <span>{{ product.price }}$</span>
+                                <small>GET NOW</small>
+                                <label> </label>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                        <h3>Sorry we didn't found anything for your request: <span style="color: red"
+                        >{{ q }}</span></h3>
+                {% endif %}
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

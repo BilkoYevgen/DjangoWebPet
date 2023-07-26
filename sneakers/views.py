@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from sneakers.forms import ContactForm
 from sneakers.models import Brand, Product, SliderImage, ProdImage
 from django.db.models import Count, Q
@@ -129,3 +129,20 @@ def payments(request):
 
 def shipping(request):
     return render(request, "sneakers/shipping.html")
+
+class Search(ListView):
+
+    template_name = 'sneakers/product_list.html'
+
+    def get_queryset(self):
+        search_query = self.request.GET.get('q')
+
+        product_filter = Q(name__icontains=search_query)
+        brand_filter = Q(brand__name__icontains=search_query)
+
+        return Product.objects.filter(product_filter | brand_filter)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['q'] = self.request.GET.get('q')
+        return context

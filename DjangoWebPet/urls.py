@@ -18,6 +18,7 @@ urlpatterns = [
     path('terms/', terms, name='terms'),
     path('payments/', payments, name='payments'),
     path('shipping/', shipping, name='shipping'),
+    path('search/', Search.as_view(), name='search'),
 ]
 
 if settings.DEBUG:
