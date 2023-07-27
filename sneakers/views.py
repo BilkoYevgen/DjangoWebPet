@@ -7,6 +7,7 @@ from sneakers.models import Brand, Product, SliderImage, ProdImage, Basket
 from django.db.models import Count, Q
 from django.contrib import messages
 from users.models import User
+from django.contrib.auth.decorators import login_required
 
 def get_product_count_by_gender(gender, exclude_kids=False):
     if exclude_kids:
@@ -146,6 +147,7 @@ def search_view(request):
 
     return render(request, template_name, context)
 
+@login_required
 def add_to_basket(request, product_id):
     product = Product.objects.get(id=product_id)
     baskets = Basket.objects.filter(user=request.user, product=product)
@@ -159,6 +161,7 @@ def add_to_basket(request, product_id):
 
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
+@login_required
 def remove_from_basket(request, basket_id):
     basket = Basket.objects.get(id=basket_id)
     basket.delete()

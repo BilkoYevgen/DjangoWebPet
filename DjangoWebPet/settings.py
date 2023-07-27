@@ -144,3 +144,4 @@ MEDIA_URL = '/media/'
 INTERNAL_IPS = ["127.0.0.1"]
 
 AUTH_USER_MODEL = 'users.User'
+LOGIN_URL = '/users/login/'

@@ -36,7 +36,7 @@
                         <i class="fas fa-user-circle"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="../orders/orders.html">Orders</a></li>
+
                         {% if user.is_superuser or use.is_staff %}
                             <li><a class="dropdown-item" href="{% url 'admin:index' %}">Admin-panel</a></li>
                         {% endif %}
