@@ -3,10 +3,10 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
 from sneakers.forms import ContactForm
-from sneakers.models import Brand, Product, SliderImage, ProdImage
+from sneakers.models import Brand, Product, SliderImage, ProdImage, Basket
 from django.db.models import Count, Q
 from django.contrib import messages
-import random
+from users.models import User
 
 def get_product_count_by_gender(gender, exclude_kids=False):
     if exclude_kids:
@@ -145,3 +145,22 @@ def search_view(request):
     }
 
     return render(request, template_name, context)
+
+def add_to_basket(request, product_id):
+    product = Product.objects.get(id=product_id)
+    baskets = Basket.objects.filter(user=request.user, product=product)
+
+    if not baskets.exists():
+        Basket.objects.create(user=request.user, product=product, quantity=1)
+    else:
+        basket = baskets.first()
+        basket.quantity += 1
+        basket.save()
+
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+def remove_from_basket(request, basket_id):
+    basket = Basket.objects.get(id=basket_id)
+    basket.delete()
+
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])

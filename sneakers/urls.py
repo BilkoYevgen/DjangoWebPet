@@ -10,4 +10,6 @@ urlpatterns = [
     path('mans/', mans, name='mans'),
     path('woman/', woman, name='woman'),
     path('kids/', kids, name='kids'),
+    path('baskets/add/<int:product_id>', add_to_basket, name="add_to_basket"),
+    path('baskets/remove/<int:basket_id>', remove_from_basket, name="remove_from_basket"),
 ]

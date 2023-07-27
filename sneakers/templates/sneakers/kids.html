@@ -28,7 +28,7 @@
                             {% endif %}
                         {% endwith %}
                         <h4><a href="/products/{{ product.name }}">{{ product.name }}</a></h4>
-                        <a class="product-btn" href="/products/{{ product.name }}">
+                        <a class="product-btn" href="{% url 'products:add_to_basket' product.id %}">
                             <span>{{ product.price }}$</span>
                             <small>GET NOW</small>
                             <label> </label>

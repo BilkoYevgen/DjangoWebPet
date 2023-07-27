@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Brand, Product, SliderImage, ProdImage
+from .models import Brand, Product, SliderImage, ProdImage, Basket
 from django.utils.safestring import mark_safe
 
 
@@ -50,3 +50,10 @@ class ProdImageAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(ProdImage, ProdImageAdmin)
+
+
+class BasketAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Basket, BasketAdmin)

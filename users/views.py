@@ -1,5 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+
+from sneakers.models import Basket
 from users.models import User
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from django.contrib import auth
@@ -40,7 +42,21 @@ def profile(request):
             return HttpResponseRedirect(reverse('users:profile'))
     else:
         form = UserProfileForm(instance=request.user)
-    return render(request, 'users/profile.html', {'form': form})
+
+    baskets = Basket.objects.filter(user=request.user)
+    total_sum = 0
+    total_quantity = 0
+    for bakset in baskets:
+        total_sum += bakset.sum()
+        total_quantity += bakset.quantity
+
+    context = {
+        'form': form,
+        'baskets': baskets,
+        'total_sum': total_sum,
+        'total_quantity': total_quantity,
+    }
+    return render(request, 'users/profile.html', context)
 
 def email_verification(request):
     return render(request, 'users/email_verification.html')

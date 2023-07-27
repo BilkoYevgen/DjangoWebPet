@@ -35,7 +35,8 @@
                         <div class="slide-text-info">
                             <h1>{{ slider_image.product.name }}</h1>
                             <label>{{ slider_image.product.short_description }}</label>
-                            <a class="slide-btn" href="#"><span>{{ slider_image.product.price }}</span>
+                            <a class="slide-btn" href="/products/{{ slider_image.product.name }}"><span
+                            >{{ slider_image.product.price }}</span>
                                 <small>GET
                                     NOW</small><label>
                                 </label></a>
@@ -99,7 +100,6 @@
                     <h3>SPECIAL <span>PRODUCTS</span></h3>
                 </div>
                 <div class="s-products-head-right">
-                    <a href="products.html"><span> </span>view all products</a>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -119,7 +119,7 @@
                                 {% endif %}
                             {% endwith %}
                             <h4><a href="/products/{{ product.name }}">{{ product.name }}</a></h4>
-                            <a class="product-btn" href="/products/{{ product.name }}">
+                            <a class="product-btn" href="{% url 'products:add_to_basket' product.id %}">
                                 <span>{{ product.price }}</span>
                                 <small>GET NOW</small>
                                 <label> </label>
