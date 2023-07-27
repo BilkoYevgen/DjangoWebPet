@@ -34,7 +34,7 @@
                     <div class="caption">
                         <div class="slide-text-info">
                             <h1>{{ slider_image.product.name }}</h1>
-                            <label>{{ slider_image.product.description }}</label>
+                            <label>{{ slider_image.product.short_description }}</label>
                             <a class="slide-btn" href="#"><span>{{ slider_image.product.price }}</span>
                                 <small>GET
                                     NOW</small><label>
@@ -59,7 +59,7 @@
                     <span><img src="{% static '/vendor1/images/obj1.png' %}" title="name"/></span>
                     <h4>TOTAL</h4>
                     <label>{{ total_prod_female }} PRODUCTS</label>
-                    <a class="r-list-w" href="{% url 'mans' %}"><img src=
+                    <a class="r-list-w" href="{% url 'woman' %}"><img src=
                                                                                "{% static '/vendor1/images/list-icon.png' %}"
                                                                      title="list"/></a>
                 </div>
@@ -71,7 +71,7 @@
                     <span><img src="{% static '/vendor1/images/obj2.png' %}" title="name"/></span>
                     <h4>TOTAL</h4>
                     <label>{{ total_prod_male }} PRODUCTS</label>
-                    <a class="r-list-w" href="{% url 'woman' %}"><img src=
+                    <a class="r-list-w" href="{% url 'mans' %}"><img src=
                                                                                        "{% static '/vendor1/images/list-icon.png' %}"
                                                                      title="list"/></a>
                 </div>

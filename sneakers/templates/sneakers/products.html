@@ -13,13 +13,13 @@
                             <h3>BRANDS</h3>
                             <ul class="col-md-6 unstyled-list b-list1">
                                 {% for brand in ten_brands %}
-                                    <li><a href="#">{{ brand.name }}</a></li>
+                                    <li><a href="{% url 'search' %}?q={{ brand.name }}">{{ brand.name }}</a></li>
                                     <div class="clearfix"></div>
                                 {% endfor %}
                             </ul>
                             <ul class="col-md-6 unstyled-list b-list2">
                                 {% for brand in next_brands %}
-                                    <li><a href="#">{{ brand.name }}</a></li>
+                                    <li><a href="{% url 'search' %}?q={{ brand.name }}">{{ brand.name }}</a></li>
                                     <div class="clearfix"></div>
                                 {% endfor %}
                             </ul>

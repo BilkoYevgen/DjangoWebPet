@@ -130,19 +130,18 @@ def payments(request):
 def shipping(request):
     return render(request, "sneakers/shipping.html")
 
-class Search(ListView):
-
+def search_view(request):
     template_name = 'sneakers/product_list.html'
+    search_query = request.GET.get('q')
 
-    def get_queryset(self):
-        search_query = self.request.GET.get('q')
+    product_filter = Q(name__icontains=search_query)
+    brand_filter = Q(brand__name__icontains=search_query)
 
-        product_filter = Q(name__icontains=search_query)
-        brand_filter = Q(brand__name__icontains=search_query)
+    queryset = Product.objects.filter(product_filter | brand_filter)
 
-        return Product.objects.filter(product_filter | brand_filter)
+    context = {
+        'object_list': queryset,
+        'q': search_query,
+    }
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['q'] = self.request.GET.get('q')
-        return context
+    return render(request, template_name, context)
