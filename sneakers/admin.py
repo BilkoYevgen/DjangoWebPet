@@ -52,8 +52,11 @@ class ProdImageAdmin(admin.ModelAdmin):
 admin.site.register(ProdImage, ProdImageAdmin)
 
 
-class BasketAdmin(admin.ModelAdmin):
-    pass
+class BasketAdmin(admin.TabularInline):
+    model = Basket
+    fields = ('product', 'quantity', 'created_timestamp')
+    readonly_fields = ('created_timestamp',)
+    extra = 0
 
 
-admin.site.register(Basket, BasketAdmin)
+# admin.site.register(Basket, BasketAdmin)

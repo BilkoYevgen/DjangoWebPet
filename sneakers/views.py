@@ -8,6 +8,7 @@ from django.db.models import Count, Q
 from django.contrib import messages
 from users.models import User
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def get_product_count_by_gender(gender, exclude_kids=False):
     if exclude_kids:
@@ -65,12 +66,27 @@ def contacts(request):
         form = ContactForm()
     return render(request, 'sneakers/contact.html', {'form': form})
 
-def products(request):
+def products(request, page=1):
     context = filter()
-    latest_products = Product.objects.order_by('-id')[:8]
-    context['last_products'] = latest_products
     context['image'] = ProdImage.objects.all()
-    context['products'] = Product.objects.all()
+    all_products = Product.objects.all().order_by('id')
+    per_page = 8
+
+    paginator = Paginator(all_products, per_page)
+
+    try:
+        page_number = int(page)
+    except ValueError:
+        page_number = 1
+
+    try:
+        products_paginator = paginator.page(page_number)
+    except EmptyPage:
+        products_paginator = paginator.page(paginator.num_pages)
+    except PageNotAnInteger:
+        products_paginator = paginator.page(1)
+
+    context['products'] = products_paginator
     context.update(brand_slice())
 
     return render(request, 'sneakers/products.html', context)

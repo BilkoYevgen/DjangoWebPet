@@ -70,86 +70,68 @@
 
 {% block content %}
     <div class="content">
-    <div class="container">
-
-        <!----speical-products---->
-        <div class="special-products all-poroducts">
-            <div class="s-products-head">
-                <div class="s-products-head-left">
-                    <h3>SPECIAL <span>PRODUCTS</span></h3>
-                </div>
-                <div class="s-products-head-right">
-                    <a href="#"><span> </span>view all products</a>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <!----special-products-grids---->
-            <div class="special-products-grids">
-                {% for product in products|slice:":8" %}
-                    <div class="col-md-3 special-products-grid text-center">
-                        <a class="brand-name" href="/products/{{ product.name }}">
-                            <img src="{{ product.brand.logo.url }}" title="name"/>
-                        </a>
-                        {% with first_image=product.images.first %}
-                            {% if first_image %}
-                                <a class="product-here" href="/products/{{ product.name }}">
-                                    <img src="{{ first_image.image.url }}" title="product-name"/>
-                                </a>
-                            {% endif %}
-                        {% endwith %}
-                        <h4><a href="/products/{{ product.name }}">{{ product.name }}</a></h4>
-                        <a class="product-btn" href="{% url 'products:add_to_basket' product.id %}">
-                            <span>{{ product.price }}$</span>
-                            <small>GET NOW</small>
-                            <label> </label>
-                        </a>
+        <div class="container">
+            <div class="special-products all-poroducts latest-products">
+                <div class="s-products-head">
+                    <div class="s-products-head-left">
+                        <h3>ALL <span>PRODUCTS</span></h3>
                     </div>
-                {% endfor %}
-                <div class="clearfix"></div>
-            </div>
-
-            <!---//special-products-grids---->
-        </div>
-        <!----->
-        <div class="special-products all-poroducts latest-products">
-            <div class="s-products-head">
-                <div class="s-products-head-left">
-                    <h3>LATEST <span>PRODUCTS</span></h3>
-                </div>
-                <div class="s-products-head-right">
-                    <a href="#"><span> </span>view all products</a>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <!----special-products-grids---->
-            <div class="special-products-grids">
-                {% for product in last_products %}
-                    <div class="col-md-3 special-products-grid text-center">
-                        <a class="brand-name" href="/products/{{ product.name }}">
-                            <img src="{{ product.brand.logo.url }}" title="name"/>
-                        </a>
-                        {% with first_image=product.images.first %}
-                            {% if first_image %}
-                                <a class="product-here" href="/products/{{ product.name }}">
-                                    <img src="{{ first_image.image.url }}" title="product-name"/>
-                                </a>
-                            {% endif %}
-                        {% endwith %}
-                        <h4><a href="/products/{{ product.name }}">{{ product.name }}</a></h4>
-                        <a class="product-btn" href="{% url 'products:add_to_basket' product.id %}">
-                            <span>{{ product.price }}$</span>
-                            <small>GET NOW</small>
-                            <label> </label>
-                        </a>
+                    <div class="s-products-head-right">
+                        <a href="#"><span> </span>view all products</a>
                     </div>
-                {% endfor %}
-                <div class="clearfix"></div>
+                    <div class="clearfix"></div>
+                </div>
+                <!----special-products-grids---->
+                <div class="special-products-grids">
+                    {% for product in products %}
+                        <div class="col-md-3 special-products-grid text-center">
+                            <a class="brand-name" href="/products/{{ product.name }}">
+                                <img src="{{ product.brand.logo.url }}" title="name"/>
+                            </a>
+                            {% with first_image=product.images.first %}
+                                {% if first_image %}
+                                    <a class="product-here" href="/products/{{ product.name }}">
+                                        <img src="{{ first_image.image.url }}" title="product-name"/>
+                                    </a>
+                                {% endif %}
+                            {% endwith %}
+                            <h4><a href="/products/{{ product.name }}">{{ product.name }}</a></h4>
+                            <a class="product-btn" href="{% url 'products:add_to_basket' product.id %}">
+                                <span>{{ product.price }}$</span>
+                                <small>GET NOW</small>
+                                <label> </label>
+                            </a>
+                        </div>
+                    {% endfor %}
+                    <div class="clearfix"></div>
+                </div>
+                <div style="text-align: center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item {% if not products.has_previous %} disabled {% endif %}">
+                                <a class="page-link" href="{% if products.has_previous %}
+                    {% url 'products:paginator' products.previous_page_number %}
+                    {% else %} #
+                {% endif %}" tabindex="-1" aria-disabled="true">Prev</a>
+                            </li>
+                            {% for page in products.paginator.page_range %}
+                                <li class="page-item">
+                                    <a class="page-link" href="{% url 'products:paginator' page %}">{{ page }}</a>
+                                </li>
+                            {% endfor %}
+                            <li class="page-item {% if not products.has_next %} disabled {% endif %}">
+                                <a class="page-link" href="{% if products.has_next %}
+                    {% url 'products:paginator' products.next_page_number %}
+                    {% else %} #
+                {% endif %}" tabindex="-1" aria-disabled="true">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!---//special-products-grids---->
             </div>
-
-            <!---//special-products-grids---->
+            <!---//speical-products---->
         </div>
-        <!---//speical-products---->
-    </div>
-    <!----content---->
+        <!----content---->
 
 {% endblock %}
