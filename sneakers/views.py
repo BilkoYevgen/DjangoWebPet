@@ -30,6 +30,7 @@ def filter():
 
     return prod_filter
 
+
 def brand_slice():
     all_brands = Brand.objects.all()
     ten_brands = all_brands[:5]
@@ -41,6 +42,7 @@ def brand_slice():
     }
 
     return brands
+
 
 def index(request):
     context = filter()
@@ -65,6 +67,7 @@ def contacts(request):
     else:
         form = ContactForm()
     return render(request, 'sneakers/contact.html', {'form': form})
+
 
 def products(request, page=1):
     context = filter()
@@ -91,10 +94,12 @@ def products(request, page=1):
 
     return render(request, 'sneakers/products.html', context)
 
+
 def single(request):
     context = brand_slice()
 
     return render(request, 'sneakers/single-page.html', context)
+
 
 def get_category(request, product_name):
     context = filter()
@@ -105,47 +110,56 @@ def get_category(request, product_name):
 
     return render(request, "sneakers/single-page.html", context)
 
-def mans(request):
-    male_products = Product.objects.filter(gender__in=['M', 'U'], is_kids=False)
 
-    context = {
-        'male_products': male_products
-    }
+class MansList(ListView):
+    model = Product
+    template_name = "sneakers/mans.html"
+    context_object_name = "male_products"
+    paginate_by = 8
+    ordering = ['-id']
 
-    return render(request, "sneakers/mans.html", context)
+    def get_queryset(self):
+        return Product.objects.filter(gender__in=['M', 'U'], is_kids=False).order_by(*self.ordering)
 
-def woman(request):
-    female_products = Product.objects.filter(gender__in=['F', 'U'], is_kids=False)
+class WomansList(ListView):
+    model = Product
+    template_name = "sneakers/woman.html"
+    context_object_name = "female_products"
+    paginate_by = 8
+    ordering = ['-id']
+    def get_queryset(self):
+        return Product.objects.filter(gender__in=['F', 'U'], is_kids=False).order_by(*self.ordering)
 
-    context = {
-        'female_products': female_products
-    }
 
-    return render(request, "sneakers/woman.html", context)
+class KidsList(ListView):
+    model = Product
+    template_name = "sneakers/kids.html"
+    context_object_name = "kids_products"
+    paginate_by = 8
+    ordering = ['-id']
+    def get_queryset(self):
+        return Product.objects.filter(is_kids=True).order_by(*self.ordering)
 
-def kids(request):
-    kids_products = Product.objects.filter(is_kids=True)
-
-    context = {
-        'kids_products': kids_products
-    }
-
-    return render(request, "sneakers/kids.html", context)
 
 def about(request):
     return render(request, "sneakers/about.html")
 
+
 def faq(request):
     return render(request, "sneakers/faq.html")
+
 
 def terms(request):
     return render(request, "sneakers/terms.html")
 
+
 def payments(request):
     return render(request, "sneakers/payment.html")
 
+
 def shipping(request):
     return render(request, "sneakers/shipping.html")
+
 
 def search_view(request):
     template_name = 'sneakers/product_list.html'
@@ -163,6 +177,7 @@ def search_view(request):
 
     return render(request, template_name, context)
 
+
 @login_required
 def add_to_basket(request, product_id):
     product = Product.objects.get(id=product_id)
@@ -176,6 +191,7 @@ def add_to_basket(request, product_id):
         basket.save()
 
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
 
 @login_required
 def remove_from_basket(request, basket_id):

@@ -3,39 +3,40 @@
 
 {% block content %}
     <div class="content">
-    <div class="container">
+        <div class="container">
 
-        <div class="special-products all-poroducts">
-            <div class="s-products-head">
-                <div class="s-products-head-left">
-                    <h3>MANS <span>PRODUCTS</span></h3>
+            <div class="special-products all-poroducts">
+                <div class="s-products-head">
+                    <div class="s-products-head-left">
+                        <h3>MANS <span>PRODUCTS</span></h3>
+                    </div>
+
+                    <div class="clearfix"></div>
                 </div>
 
-                <div class="clearfix"></div>
+                <div class="special-products-grids">
+                    {% for product in male_products %}
+                        <div class="col-md-3 special-products-grid text-center">
+                            <a class="brand-name" href="/products/{{ product.name }}">
+                                <img src="{{ product.brand.logo.url }}" title="name"/>
+                            </a>
+                            {% with first_image=product.images.first %}
+                                {% if first_image %}
+                                    <a class="product-here" href="/products/{{ product.name }}">
+                                        <img src="{{ first_image.image.url }}" title="product-name"/>
+                                    </a>
+                                {% endif %}
+                            {% endwith %}
+                            <h4><a href="/products/{{ product.name }}">{{ product.name }}</a></h4>
+                            <a class="product-btn" href="{% url 'products:add_to_basket' product.id %}">
+                                <span>{{ product.price }}$</span>
+                                <small>GET NOW</small>
+                                <label> </label>
+                            </a>
+                        </div>
+                    {% endfor %}
+                    <div class="clearfix"></div>
+                </div>
+                {% include 'sneakers/pagination.html' %}
             </div>
-
-            <div class="special-products-grids">
-                {% for product in male_products %}
-                    <div class="col-md-3 special-products-grid text-center">
-                        <a class="brand-name" href="/products/{{ product.name }}">
-                            <img src="{{ product.brand.logo.url }}" title="name"/>
-                        </a>
-                        {% with first_image=product.images.first %}
-                            {% if first_image %}
-                                <a class="product-here" href="/products/{{ product.name }}">
-                                    <img src="{{ first_image.image.url }}" title="product-name"/>
-                                </a>
-                            {% endif %}
-                        {% endwith %}
-                        <h4><a href="/products/{{ product.name }}">{{ product.name }}</a></h4>
-                        <a class="product-btn" href="{% url 'products:add_to_basket' product.id %}">
-                            <span>{{ product.price }}$</span>
-                            <small>GET NOW</small>
-                            <label> </label>
-                        </a>
-                    </div>
-                {% endfor %}
-                <div class="clearfix"></div>
-            </div>
-        </div>
 {% endblock %}
