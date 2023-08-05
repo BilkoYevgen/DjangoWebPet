@@ -95,18 +95,13 @@ def products(request, page=1):
     return render(request, 'sneakers/products.html', context)
 
 
-def single(request):
-    context = brand_slice()
-
-    return render(request, 'sneakers/single-page.html', context)
-
-
 def get_category(request, product_name):
     context = filter()
     context.update(brand_slice())
     item = Product.objects.get(name=product_name)
     context['item'] = item
     context['category'] = Product.objects.get(pk=item.id)
+    context['image'] = ProdImage.objects.filter(product__name=product_name)
 
     return render(request, "sneakers/single-page.html", context)
 

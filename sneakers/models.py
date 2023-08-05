@@ -25,7 +25,6 @@ class Product(models.Model):
     old_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
     short_description = models.CharField(max_length=30, null=True, blank=True, default='Shoes')
     special_prod = models.BooleanField(default=False)
-    images = models.ManyToManyField('ProdImage', related_name='products')
 
 
     def __str__(self):
@@ -51,7 +50,8 @@ class SliderImage(models.Model):
 
 
 class ProdImage(models.Model):
-    image = models.ImageField(upload_to='product_images/')
+    image = models.ImageField(upload_to='product_images/', default='default_image.jpg')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images', null=True)
 
     def __str__(self):
         return self.image.name + ' Image'

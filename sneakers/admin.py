@@ -16,11 +16,15 @@ class BrandAdmin(admin.ModelAdmin):
 
 admin.site.register(Brand, BrandAdmin)
 
+class ProdImageAdmin(admin.TabularInline):
+    fk_name = 'product'
+    model = ProdImage
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'brand', 'gender', 'is_kids', 'price')
     list_display_links = ('name',)
     exclude = ('size',)
+    inlines = [ProdImageAdmin, ]
 
     # def display_image(self, obj):
     #     if obj.image:
