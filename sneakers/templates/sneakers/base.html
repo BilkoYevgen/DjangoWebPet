@@ -62,7 +62,7 @@
     <div class="top-header">
         <div class="logo">
             <a href="{% url 'index' %}"><img src="{% static '/vendor1/images/logo.png' %}"
-                                                    title="barndlogo"/></a>
+                                             title="barndlogo"/></a>
         </div>
         <div class="top-header-info">
             <div class="top-contact-info">
@@ -125,8 +125,16 @@
         </div>
         <!---top-header-search-box--->
         <div class="clearfix"></div>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </div>
 </div>
+
 
 {% block filter %} {% endblock %}
 {% block content %} {% endblock %}

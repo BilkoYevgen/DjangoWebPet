@@ -19,6 +19,7 @@ urlpatterns = [
     path('payments/', payments, name='payments'),
     path('shipping/', shipping, name='shipping'),
     path('search/', search_view, name='search'),
+    path('captcha/', include('captcha.urls')),
 ]
 
 if settings.DEBUG:

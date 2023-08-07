@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'users.apps.UsersConfig',
     'sneakers.apps.SneakersConfig',
+    'captcha',
 ]
 
 MIDDLEWARE = [

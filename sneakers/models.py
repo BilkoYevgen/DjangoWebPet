@@ -25,6 +25,7 @@ class Product(models.Model):
     old_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
     short_description = models.CharField(max_length=30, null=True, blank=True, default='Shoes')
     special_prod = models.BooleanField(default=False)
+    is_published = models.BooleanField(default=True)
 
 
     def __str__(self):

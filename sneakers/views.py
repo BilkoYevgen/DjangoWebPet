@@ -62,6 +62,7 @@ def contacts(request):
             email = request.POST["email"]
             subject = request.POST["subject"]
             message = request.POST["message"]
+            human = True
             messages.success(request, 'Your form was sent successfully sended')
             return HttpResponseRedirect(reverse('contacts'))
     else:
@@ -177,6 +178,7 @@ def search_view(request):
 def add_to_basket(request, product_id):
     product = Product.objects.get(id=product_id)
     baskets = Basket.objects.filter(user=request.user, product=product)
+    messages.success(request, "Added successfully")
 
     if not baskets.exists():
         Basket.objects.create(user=request.user, product=product, quantity=1)
@@ -184,7 +186,6 @@ def add_to_basket(request, product_id):
         basket = baskets.first()
         basket.quantity += 1
         basket.save()
-
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 

@@ -1,6 +1,4 @@
-from sneakers.models import Product
-from django import forms
-
+from captcha.fields import CaptchaField
 from django import forms
 
 class ContactForm(forms.Form):
@@ -16,3 +14,4 @@ class ContactForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea(attrs={
         'onfocus': "this.value='';", 'onblur': "if (this.value=='') {this.value='Message';}"
     }))
+    captcha = CaptchaField()

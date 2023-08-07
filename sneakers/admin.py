@@ -21,17 +21,12 @@ class ProdImageAdmin(admin.TabularInline):
     model = ProdImage
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'brand', 'gender', 'is_kids', 'price')
+    list_display = ('name', 'brand', 'gender', 'is_kids', 'price', 'is_published',)
     list_display_links = ('name',)
+    list_editable = ('brand', 'gender', 'is_kids', 'price', 'is_published',)
     exclude = ('size',)
+    list_filter = ('brand', 'gender',)
     inlines = [ProdImageAdmin, ]
-
-    # def display_image(self, obj):
-    #     if obj.image:
-    #         return mark_safe(f'<img src="{obj.image.url}" width="75">')
-    #     return None
-    #
-    # display_image.short_description = 'Image'
 
 
 admin.site.register(Product, ProductAdmin)
@@ -51,7 +46,14 @@ class SliderAdmin(admin.ModelAdmin):
 admin.site.register(SliderImage, SliderAdmin)
 
 class ProdImageAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('image', 'product', 'display_image',)
+
+    def display_image(self, obj):
+        if obj.image:
+            return mark_safe(f'<img src="{obj.image.url}" width="75">')
+        return None
+
+    display_image.short_description = 'Image'
 
 admin.site.register(ProdImage, ProdImageAdmin)
 

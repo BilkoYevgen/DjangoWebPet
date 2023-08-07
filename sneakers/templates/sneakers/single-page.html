@@ -3,6 +3,8 @@
 
 
 {% block content %}
+
+
     <div class="product-details">
         <div class="container">
             <div class="product-details-row1">
@@ -89,7 +91,9 @@
                         <div class="clearfix"></div>
                         <div class="product-cart-share">
                             <div class="add-cart-btn">
-                                <input type="button"  value="Add to cart"/>
+                                <a href="{% url 'products:add_to_basket' category.id %}">
+                                <input type="button"  value="Add to cart" />
+                                </a>
                             </div>
                         </div>
                     </div>
