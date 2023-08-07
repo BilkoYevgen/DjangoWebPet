@@ -4,11 +4,12 @@ from django.contrib.auth.decorators import login_required
 from sneakers.models import Basket
 from users.models import User
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.urls import reverse
+from django.contrib.auth import login
 
 # Create your views here.
-def login(request):
+def loging(request):
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
@@ -27,7 +28,8 @@ def register(request):
     if request.method == "POST":
         form = UserRegistrationForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            login(request, user)
             return HttpResponseRedirect(reverse("users:email_verification"))
     else:
         form = UserRegistrationForm()

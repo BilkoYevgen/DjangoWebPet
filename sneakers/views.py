@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
 from sneakers.forms import ContactForm
@@ -9,12 +9,13 @@ from django.contrib import messages
 from users.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.mail import send_mail
 
 def get_product_count_by_gender(gender, exclude_kids=False):
     if exclude_kids:
-        return Product.objects.filter(Q(gender=gender) | Q(gender='U'), is_kids=False).count()
+        return Product.objects.filter(Q(gender=gender) | Q(gender='U'), is_kids=False, is_published=True).count()
     else:
-        return Product.objects.filter(is_kids=True).count()
+        return Product.objects.filter(is_kids=True, is_published=True).count()
 
 
 def filter():
@@ -47,7 +48,7 @@ def brand_slice():
 def index(request):
     context = filter()
     context['image'] = ProdImage.objects.all()
-    context['products'] = Product.objects.all()
+    context['products'] = Product.objects.filter(is_published=True)
     context['slider_image'] = SliderImage.objects.all()
 
     return render(request, 'sneakers/index.html', context)
@@ -57,13 +58,20 @@ def contacts(request):
     if request.method == "POST":
         form = ContactForm(data=request.POST)
         if form.is_valid():
-            # Process the form data here (e.g., send the email)
-            name = request.POST["name"]
-            email = request.POST["email"]
-            subject = request.POST["subject"]
-            message = request.POST["message"]
-            human = True
-            messages.success(request, 'Your form was sent successfully sended')
+            name = form.cleaned_data["name"]
+            email = form.cleaned_data["email"]
+            subject = form.cleaned_data["subject"]
+            message = form.cleaned_data["message"]
+
+            # Send the email
+            send_mail(
+                subject,
+                f"From: {name}\nEmail: {email}\n\n{message}",
+                'your_email@example.com',  # Sender's email address
+                ['recipient@example.com'],  # List of recipient email addresses
+                fail_silently=False,
+            )
+            messages.success(request, 'Your form was sent successfully sent')
             return HttpResponseRedirect(reverse('contacts'))
     else:
         form = ContactForm()
@@ -73,7 +81,7 @@ def contacts(request):
 def products(request, page=1):
     context = filter()
     context['image'] = ProdImage.objects.all()
-    all_products = Product.objects.all().order_by('id')
+    all_products = Product.objects.filter(is_published=True).order_by('id')
     per_page = 8
 
     paginator = Paginator(all_products, per_page)
@@ -99,7 +107,7 @@ def products(request, page=1):
 def get_category(request, product_name):
     context = filter()
     context.update(brand_slice())
-    item = Product.objects.get(name=product_name)
+    item = get_object_or_404(Product, name=product_name, is_published=True)
     context['item'] = item
     context['category'] = Product.objects.get(pk=item.id)
     context['image'] = ProdImage.objects.filter(product__name=product_name)
@@ -115,7 +123,7 @@ class MansList(ListView):
     ordering = ['-id']
 
     def get_queryset(self):
-        return Product.objects.filter(gender__in=['M', 'U'], is_kids=False).order_by(*self.ordering)
+        return Product.objects.filter(gender__in=['M', 'U'], is_kids=False, is_published=True).order_by(*self.ordering)
 
 class WomansList(ListView):
     model = Product
@@ -124,7 +132,7 @@ class WomansList(ListView):
     paginate_by = 8
     ordering = ['-id']
     def get_queryset(self):
-        return Product.objects.filter(gender__in=['F', 'U'], is_kids=False).order_by(*self.ordering)
+        return Product.objects.filter(gender__in=['F', 'U'], is_kids=False, is_published=True).order_by(*self.ordering)
 
 
 class KidsList(ListView):
@@ -134,35 +142,15 @@ class KidsList(ListView):
     paginate_by = 8
     ordering = ['-id']
     def get_queryset(self):
-        return Product.objects.filter(is_kids=True).order_by(*self.ordering)
-
-
-def about(request):
-    return render(request, "sneakers/about.html")
-
-
-def faq(request):
-    return render(request, "sneakers/faq.html")
-
-
-def terms(request):
-    return render(request, "sneakers/terms.html")
-
-
-def payments(request):
-    return render(request, "sneakers/payment.html")
-
-
-def shipping(request):
-    return render(request, "sneakers/shipping.html")
+        return Product.objects.filter(is_kids=True, is_published=True).order_by(*self.ordering)
 
 
 def search_view(request):
     template_name = 'sneakers/product_list.html'
     search_query = request.GET.get('q')
 
-    product_filter = Q(name__icontains=search_query)
-    brand_filter = Q(brand__name__icontains=search_query)
+    product_filter = Q(name__icontains=search_query, is_published=True)
+    brand_filter = Q(brand__name__icontains=search_query, is_published=True)
 
     queryset = Product.objects.filter(product_filter | brand_filter)
 
@@ -195,3 +183,22 @@ def remove_from_basket(request, basket_id):
     basket.delete()
 
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+def about(request):
+    return render(request, "sneakers/about.html")
+
+
+def faq(request):
+    return render(request, "sneakers/faq.html")
+
+
+def terms(request):
+    return render(request, "sneakers/terms.html")
+
+
+def payments(request):
+    return render(request, "sneakers/payment.html")
+
+
+def shipping(request):
+    return render(request, "sneakers/shipping.html")
