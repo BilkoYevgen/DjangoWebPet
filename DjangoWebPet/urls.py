@@ -7,6 +7,8 @@ from sneakers.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
+    path('captcha/', include('captcha.urls')),
+
     path('products/', include('sneakers.urls', namespace="products")),
     path('users/', include('users.urls', namespace='users')),
     path('contacts/', contacts, name='contacts'),
@@ -19,7 +21,10 @@ urlpatterns = [
     path('payments/', payments, name='payments'),
     path('shipping/', shipping, name='shipping'),
     path('search/', search_view, name='search'),
-    path('captcha/', include('captcha.urls')),
+
+    path('api-auth/', include('rest_framework.urls')),
+    path('api/v1/product/', SneakersViewSet.as_view()),
+    path('api/v1/product/<int:pk>/', SneakersDetailViewSet.as_view()),
 ]
 
 if settings.DEBUG:

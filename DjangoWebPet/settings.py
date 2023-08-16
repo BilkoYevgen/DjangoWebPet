@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'sneakers.apps.SneakersConfig',
     'captcha',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -147,3 +148,12 @@ INTERNAL_IPS = ["127.0.0.1"]
 
 AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = '/users/login/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 2,
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

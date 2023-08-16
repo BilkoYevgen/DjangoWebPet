@@ -2,10 +2,14 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views.generic import DetailView, ListView
+from rest_framework import generics
+
 from sneakers.forms import ContactForm
 from sneakers.models import Brand, Product, SliderImage, ProdImage, Basket
 from django.db.models import Count, Q
 from django.contrib import messages
+
+from sneakers.serializer import ProductSerializer
 from users.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -202,3 +206,11 @@ def payments(request):
 
 def shipping(request):
     return render(request, "sneakers/shipping.html")
+
+class SneakersViewSet(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class SneakersDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
